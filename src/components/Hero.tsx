@@ -18,8 +18,10 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background with Gradient Overlay */}
+<section
+  id="home"
+  className="relative min-h-[85vh] md:min-h-screen flex items-center justify-center overflow-hidden"
+>      {/* Background with Gradient Overlay */}
       <div className="absolute inset-0 bg-navy-gradient">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-30" />
         <div className="absolute inset-0 bg-gradient-to-b from-navy/80 via-navy/60 to-navy/90" />
@@ -30,7 +32,7 @@ const Hero = () => {
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 py-32">
+<div className="relative z-10 container mx-auto px-4 py-20 md:py-32">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
           <motion.div
@@ -48,7 +50,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-display text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight"
+className="font-display text-3xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight"
           >
             Experience{" "}
             <span className="text-gold">Luxury Living</span>
