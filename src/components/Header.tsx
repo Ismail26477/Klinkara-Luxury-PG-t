@@ -1,3 +1,5 @@
+"use client"
+
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, Phone, MapPin } from "lucide-react"
@@ -29,11 +31,11 @@ const Header = () => {
 
   return (
     <>
-      {/* Desktop top bar */}
-      <div className="bg-navy text-white py-2 text-sm hidden md:block">
-        <div className="container mx-auto px-4 flex justify-between">
+      {/* DESKTOP TOP BAR */}
+      <div className="hidden md:block bg-navy text-white text-sm py-2">
+        <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex gap-6">
-            <a href="tel:+917799066011" className="flex items-center gap-2">
+            <a href="tel:+917799066011" className="flex items-center gap-2 hover:text-gold transition">
               <Phone className="w-4 h-4" /> +91 77990 66011
             </a>
             <span className="flex items-center gap-2">
@@ -44,72 +46,91 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Header */}
+      {/* HEADER */}
       <motion.header
-        className={`fixed left-0 right-0 z-50 transition-all duration-300 ${
-  isScrolled ? "top-0 glass-effect shadow-lg" : "top-10 bg-transparent"
-}`}
+        className={`
+          fixed left-0 right-0 z-50 transition-all duration-300
+          ${isScrolled ? "bg-gold shadow-lg" : "bg-transparent"}
+          top-0
+          ${!isScrolled ? "md:top-10" : "md:top-0"}
+        `}
       >
         <div className="container mx-auto px-4">
-          <div className={`flex items-center justify-between transition-all ${isScrolled ? "h-16" : "h-20"}`}>
-            
-            {/* Logo */}
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gold flex items-center justify-center">
-                <span className="font-bold text-navy">K</span>
-              </div>
-              <div>
-                <div className={`font-semibold ${isScrolled ? "text-navy" : "text-white"}`}>
-                  Klinkara
-                </div>
-                <div className={`text-xs ${isScrolled ? "text-gray-500" : "text-white/70"}`}>
-                  Luxury PG
-                </div>
-              </div>
-            </div>
 
-            {/* Desktop nav */}
-            <nav className="hidden lg:flex gap-8">
-              {navLinks.map((l) => (
+          {/* MOBILE HEADER */}
+          <div className="flex items-center justify-between h-16 lg:hidden">
+            <button
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="hover:scale-110 transition"
+            >
+              <Menu className={`w-7 h-7 ${isScrolled ? "text-navy" : "text-white"}`} />
+            </button>
+
+            <img
+              src="/logo.png"
+              alt="Klinkara Luxury PG"
+              className="h-16 w-auto object-contain hover:scale-105 transition  "
+            />
+
+            <a href="tel:+917799066011" className="hover:scale-110 transition">
+              <Phone className={`w-6 h-6 ${isScrolled ? "text-navy" : "text-white"}`} />
+            </a>
+          </div>
+
+          {/* DESKTOP HEADER */}
+          <div className={`hidden lg:flex items-center justify-between ${isScrolled ? "h-16" : "h-20"}`}>
+
+            {/* LOGO */}
+            <img
+              src="/logo.png"
+              alt="Klinkara Luxury PG"
+              className={`transition-all duration-300 hover:scale-105 ${
+                isScrolled ? "h-12" : "h-24"
+              } w-auto object-contain`}
+            />
+
+            {/* NAV */}
+            <nav className="flex gap-8">
+              {navLinks.map((link) => (
                 <button
-                  key={l.name}
-                  onClick={() => scrollToSection(l.href)}
-                  className={`${isScrolled ? "text-navy" : "text-white"} hover:text-gold`}
+                  key={link.name}
+                  onClick={() => scrollToSection(link.href)}
+                  className={`relative font-medium transition-colors
+                    ${isScrolled ? "text-navy" : "text-white"}
+                    hover:text-black
+                    after:absolute after:left-0 after:-bottom-1
+                    after:h-[2px] after:w-0 after:bg-black
+                    after:transition-all after:duration-300
+                    hover:after:w-full
+                  `}
                 >
-                  {l.name}
+                  {link.name}
                 </button>
               ))}
             </nav>
 
-            {/* CTA Buttons */}
-            <div className="hidden lg:flex items-center gap-4">
+            {/* CTA */}
+            <div className="flex gap-4">
               <a
                 href="tel:+917799066011"
-                className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
-                  isScrolled 
-                    ? "bg-navy/10 text-navy hover:bg-navy/20" 
-                    : "bg-white/20 text-white hover:bg-white/30"
-                }`}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all
+                  hover:shadow-md hover:scale-105
+                  ${isScrolled ? "bg-white/80 text-navy" : "bg-white/20 text-white"}
+                `}
               >
                 <Phone className="w-5 h-5" />
-                <span className="font-medium text-sm">Call Us</span>
+                Call Us
               </a>
-              <Button
-                onClick={() => scrollToSection("#contact")}
-                className="bg-gold hover:bg-gold-dark text-navy font-semibold"
-              >
+
+              <Button className="bg-black text-gold font-semibold transition-all hover:scale-105 hover:shadow-xl">
                 Book Now
               </Button>
             </div>
-            {/* Mobile menu button */}
-            <button className="lg:hidden" onClick={() => setIsMobileMenuOpen(true)}>
-              <Menu className={`w-7 h-7 ${isScrolled ? "text-navy" : "text-white"}`} />
-            </button>
           </div>
         </div>
       </motion.header>
 
-      {/* MOBILE FULLSCREEN MENU */}
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -119,9 +140,9 @@ const Header = () => {
             className="fixed inset-0 z-[999] bg-navy/95 backdrop-blur"
           >
             <div className="p-6 flex justify-between items-center">
-              <span className="text-white font-semibold">Menu</span>
+              <img src="/logo.png" className="h-8 w-auto" />
               <button onClick={() => setIsMobileMenuOpen(false)}>
-                <X className="w-7 h-7 text-white" />
+                <X className="w-7 h-7 text-white hover:rotate-90 transition" />
               </button>
             </div>
 
@@ -130,13 +151,13 @@ const Header = () => {
                 <button
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
-                  className="block text-white text-lg w-full text-left"
+                  className="block text-white text-lg w-full text-left transition-all hover:text-gold hover:translate-x-2"
                 >
                   {link.name}
                 </button>
               ))}
 
-              <Button className="w-full mt-6 bg-gold text-navy">
+              <Button className="w-full mt-6 bg-gold text-navy font-semibold hover:scale-105 transition">
                 Book Now
               </Button>
             </div>
@@ -148,4 +169,3 @@ const Header = () => {
 }
 
 export default Header
- 
