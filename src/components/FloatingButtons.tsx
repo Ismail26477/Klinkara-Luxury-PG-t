@@ -172,7 +172,7 @@ const FloatingButtons = () => {
           transition={{ delay: 1, type: "spring", stiffness: 200 }}
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.95 }}
-          className="w-14 h-14 rounded-full bg-navy shadow-lg flex items-center justify-center group relative overflow-hidden"
+  className="hidden md:flex w-14 h-14 rounded-full bg-navy shadow-lg items-center justify-center group relative overflow-hidden"
           aria-label="Call us"
         >
           <motion.div
