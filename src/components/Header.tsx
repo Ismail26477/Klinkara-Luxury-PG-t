@@ -29,13 +29,26 @@ const Header = () => {
     setIsMobileMenuOpen(false)
   }
 
+  // ✅ WHATSAPP BOOK NOW HANDLER
+  const openWhatsApp = () => {
+    const phoneNumber = "917799066011" // no +
+    const message = encodeURIComponent(
+      "Hi, I am interested in Klinkara Luxury PG. Please share details about availability and pricing."
+    )
+
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank")
+  }
+
   return (
     <>
       {/* DESKTOP TOP BAR */}
       <div className="hidden md:block bg-navy text-white text-sm py-2">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex gap-6">
-            <a href="tel:+917799066011" className="flex items-center gap-2 hover:text-gold transition">
+            <a
+              href="tel:+917799066011"
+              className="flex items-center gap-2 hover:text-gold transition"
+            >
               <Phone className="w-4 h-4" /> +91 77990 66011
             </a>
             <span className="flex items-center gap-2">
@@ -63,29 +76,40 @@ const Header = () => {
               onClick={() => setIsMobileMenuOpen(true)}
               className="hover:scale-110 transition"
             >
-              <Menu className={`w-7 h-7 ${isScrolled ? "text-navy" : "text-white"}`} />
+              <Menu
+                className={`w-7 h-7 ${
+                  isScrolled ? "text-navy" : "text-white"
+                }`}
+              />
             </button>
 
             <img
-              src="/logo.png"
+              src="/header-logo.png"
               alt="Klinkara Luxury PG"
-              className="h-16 w-auto object-contain hover:scale-105 transition  "
+              className="h-32 w-72 object-contain transition"
             />
 
             <a href="tel:+917799066011" className="hover:scale-110 transition">
-              <Phone className={`w-6 h-6 ${isScrolled ? "text-navy" : "text-white"}`} />
+              <Phone
+                className={`w-6 h-6 ${
+                  isScrolled ? "text-navy" : "text-white"
+                }`}
+              />
             </a>
           </div>
 
           {/* DESKTOP HEADER */}
-          <div className={`hidden lg:flex items-center justify-between ${isScrolled ? "h-16" : "h-20"}`}>
-
+          <div
+            className={`hidden lg:flex items-center justify-between ${
+              isScrolled ? "h-16" : "h-20"
+            }`}
+          >
             {/* LOGO */}
             <img
-              src="/logo.png"
+              src="/header-logo.png"
               alt="Klinkara Luxury PG"
-              className={`transition-all duration-300 hover:scale-105 ${
-                isScrolled ? "h-12" : "h-24"
+              className={`transition-all duration-300 ${
+                isScrolled ? "h-32" : "h-40"
               } w-auto object-contain`}
             />
 
@@ -115,14 +139,22 @@ const Header = () => {
                 href="tel:+917799066011"
                 className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all
                   hover:shadow-md hover:scale-105
-                  ${isScrolled ? "bg-white/80 text-navy" : "bg-white/20 text-white"}
+                  ${
+                    isScrolled
+                      ? "bg-white/80 text-navy"
+                      : "bg-white/20 text-white"
+                  }
                 `}
               >
                 <Phone className="w-5 h-5" />
                 Call Us
               </a>
 
-              <Button className="bg-black text-gold font-semibold transition-all hover:scale-105 hover:shadow-xl">
+              {/* ✅ BOOK NOW → WHATSAPP */}
+              <Button
+                onClick={openWhatsApp}
+                className="bg-black text-gold font-semibold transition-all hover:scale-105 hover:shadow-xl"
+              >
                 Book Now
               </Button>
             </div>
@@ -140,7 +172,12 @@ const Header = () => {
             className="fixed inset-0 z-[999] bg-navy/95 backdrop-blur"
           >
             <div className="p-6 flex justify-between items-center">
-              <img src="/logo.png" className="h-8 w-auto" />
+              <img
+                src="/header-logo.png"
+                alt="Klinkara Luxury PG"
+                className="h-32 w-auto object-contain"
+              />
+
               <button onClick={() => setIsMobileMenuOpen(false)}>
                 <X className="w-7 h-7 text-white hover:rotate-90 transition" />
               </button>
@@ -157,7 +194,11 @@ const Header = () => {
                 </button>
               ))}
 
-              <Button className="w-full mt-6 bg-gold text-navy font-semibold hover:scale-105 transition">
+              {/* ✅ MOBILE BOOK NOW → WHATSAPP */}
+              <Button
+                onClick={openWhatsApp}
+                className="w-full mt-6 bg-gold text-navy font-semibold hover:scale-105 transition"
+              >
                 Book Now
               </Button>
             </div>
