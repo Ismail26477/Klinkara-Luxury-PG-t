@@ -22,7 +22,8 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Address",
-    value: "HPF2+3G9, Maan Road, Phase 3, Hinjawadi, Pimpri-Chinchwad, Pune, Maharashtra 411057",
+    value:
+      "HPF2+3G9, Maan Road, Phase 3, Hinjawadi, Pimpri-Chinchwad, Pune, Maharashtra 411057",
     link: "https://maps.google.com/?q=Klinkara+Luxury+Hinjawadi+Pune",
   },
   {
@@ -35,32 +36,69 @@ const contactInfo = [
 
 const Contact = () => {
   const { toast } = useToast();
+
+  // ✅ ONLY ADD: missing fields so inputs work
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
+    moveInDate: "",
+    roomType: "",
+    budget: "",
     message: "",
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // ✅ ONLY CHANGE: Submit → WhatsApp
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const phoneNumber = "917799066011"; // WhatsApp number (no +)
+
+    const whatsappMessage = encodeURIComponent(
+      `Hi, I am interested in Klinkara Luxury PG. Please find my details below:
+
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Move-in Date: ${formData.moveInDate}
+Room Type: ${formData.roomType}
+Budget: ${formData.budget}
+
+Message:
+${formData.message}
+`
+    );
+
+    window.open(
+      `https://wa.me/${phoneNumber}?text=${whatsappMessage}`,
+      "_blank"
+    );
 
     toast({
-      title: "Message Sent Successfully!",
-      description: "We'll get back to you within 24 hours.",
+      title: "Opening WhatsApp",
+      description: "Your message is ready to send.",
     });
 
-    setFormData({ name: "", email: "", phone: "", message: "" });
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      moveInDate: "",
+      roomType: "",
+      budget: "",
+      message: "",
+    });
+
     setIsSubmitting(false);
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -83,7 +121,8 @@ const Contact = () => {
             Contact Us
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Ready to experience luxury living? Get in touch with us to schedule a visit or book your room.
+            Ready to experience luxury living? Get in touch with us to schedule a
+            visit or book your room.
           </p>
         </motion.div>
 
@@ -101,108 +140,99 @@ const Contact = () => {
             </h3>
 
             <form onSubmit={handleSubmit} className="space-y-5">
+              <Input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="h-12 rounded-xl border-border focus:border-gold focus:ring-gold"
+              />
 
-  {/* Name */}
-  <Input
-    type="text"
-    name="name"
-    placeholder="Your Name"
-    value={formData.name}
-    onChange={handleChange}
-    required
-    className="h-12 rounded-xl border-border focus:border-gold focus:ring-gold"
-  />
+              <div className="grid sm:grid-cols-2 gap-4">
+                <Input
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="h-12 rounded-xl border-border focus:border-gold focus:ring-gold"
+                />
+                <Input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone Number"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  className="h-12 rounded-xl border-border focus:border-gold focus:ring-gold"
+                />
+              </div>
 
-  {/* Email + Phone */}
-  <div className="grid sm:grid-cols-2 gap-4">
-    <Input
-      type="email"
-      name="email"
-      placeholder="Email Address"
-      value={formData.email}
-      onChange={handleChange}
-      required
-      className="h-12 rounded-xl border-border focus:border-gold focus:ring-gold"
-    />
-    <Input
-      type="tel"
-      name="phone"
-      placeholder="Phone Number"
-      value={formData.phone}
-      onChange={handleChange}
-      required
-      className="h-12 rounded-xl border-border focus:border-gold focus:ring-gold"
-    />
-  </div>
+              <Input
+                type="date"
+                name="moveInDate"
+                value={formData.moveInDate}
+                onChange={handleChange}
+                required
+                className="h-12 rounded-xl border-border focus:border-gold focus:ring-gold"
+              />
 
-  {/* Move-in Date */}
-  <Input
-    type="date"
-    name="moveInDate"
-    value={formData.moveInDate}
-    onChange={handleChange}
-    required
-    className="h-12 rounded-xl border-border focus:border-gold focus:ring-gold"
-  />
+              <select
+                name="roomType"
+                value={formData.roomType}
+                onChange={handleChange}
+                required
+                className="w-full h-12 rounded-xl border border-border bg-background px-4 text-sm focus:outline-none focus:ring-2 focus:ring-gold"
+              >
+                <option value="">Select Room Type</option>
+                <option value="Single Sharing – ₹16,000/month">
+                  Single Sharing – ₹16,000 / month
+                </option>
+                <option value="Double Sharing – ₹9,000/month">
+                  Double Sharing – ₹9,000 / month
+                </option>
+                <option value="Triple Sharing – ₹7,500/month">
+                  Triple Sharing – ₹7,500 / month
+                </option>
+              </select>
 
-  {/* Room Type */}
-  <select
-    name="roomType"
-    value={formData.roomType}
-    onChange={handleChange}
-    required
-    className="w-full h-12 rounded-xl border border-border bg-background px-4 text-sm focus:outline-none focus:ring-2 focus:ring-gold"
-  >
-    <option value="">Select Room Type</option>
-    <option value="Single Sharing - ₹16,000/month">
-      Single Sharing – ₹16,000 / month
-    </option>
-    <option value="Double Sharing - ₹9,000/month">
-      Double Sharing – ₹9,000 / month
-    </option>
-    <option value="Triple Sharing - ₹7,500/month">
-      Triple Sharing – ₹7,500 / month
-    </option>
-  </select>
+              <Input
+                type="text"
+                name="budget"
+                placeholder="Monthly Budget (e.g. ₹10,000 – ₹15,000)"
+                value={formData.budget}
+                onChange={handleChange}
+                className="h-12 rounded-xl border-border focus:border-gold focus:ring-gold"
+              />
 
-  {/* Budget */}
-  <Input
-    type="text"
-    name="budget"
-    placeholder="Monthly Budget (e.g. ₹10,000 – ₹15,000)"
-    value={formData.budget}
-    onChange={handleChange}
-    className="h-12 rounded-xl border-border focus:border-gold focus:ring-gold"
-  />
+              <Textarea
+                name="message"
+                placeholder="Additional Notes (preferences, questions, etc.)"
+                value={formData.message}
+                onChange={handleChange}
+                rows={4}
+                className="rounded-xl border-border focus:border-gold focus:ring-gold resize-none"
+              />
 
-  {/* Message */}
-  <Textarea
-    name="message"
-    placeholder="Additional Notes (preferences, questions, etc.)"
-    value={formData.message}
-    onChange={handleChange}
-    rows={4}
-    className="rounded-xl border-border focus:border-gold focus:ring-gold resize-none"
-  />
-
-  {/* Submit */}
-  <Button
-    type="submit"
-    disabled={isSubmitting}
-    className="w-full h-12 bg-gold hover:bg-gold-dark text-navy font-semibold rounded-xl"
-  >
-    {isSubmitting ? "Sending..." : (
-      <>
-        <Send className="w-4 h-4 mr-2" />
-        Send Message
-      </>
-    )}
-  </Button>
-</form>
-
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full h-12 bg-gold hover:bg-gold-dark text-navy font-semibold rounded-xl"
+              >
+                {isSubmitting ? "Opening WhatsApp..." : (
+                  <>
+                    <Send className="w-4 h-4 mr-2" />
+                    Send Message
+                  </>
+                )}
+              </Button>
+            </form>
           </motion.div>
 
-          {/* Contact Info & Map */}
+          {/* RIGHT SIDE UNCHANGED */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -210,7 +240,6 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            {/* Contact Cards */}
             <div className="grid sm:grid-cols-2 gap-4">
               {contactInfo.map((info, index) => (
                 <motion.div
@@ -226,18 +255,28 @@ const Contact = () => {
                       <info.icon className="w-5 h-5 text-gold" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-navy mb-1">{info.title}</h4>
+                      <h4 className="font-semibold text-navy mb-1">
+                        {info.title}
+                      </h4>
                       {info.link ? (
                         <a
                           href={info.link}
-                          target={info.link.startsWith("http") ? "_blank" : undefined}
-                          rel={info.link.startsWith("http") ? "noopener noreferrer" : undefined}
+                          target={
+                            info.link.startsWith("http") ? "_blank" : undefined
+                          }
+                          rel={
+                            info.link.startsWith("http")
+                              ? "noopener noreferrer"
+                              : undefined
+                          }
                           className="text-sm text-muted-foreground hover:text-gold transition-colors"
                         >
                           {info.value}
                         </a>
                       ) : (
-                        <p className="text-sm text-muted-foreground">{info.value}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {info.value}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -245,7 +284,6 @@ const Contact = () => {
               ))}
             </div>
 
-            {/* Map */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
