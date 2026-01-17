@@ -1,6 +1,8 @@
-import { motion } from "framer-motion";
-import { Check, Star } from "lucide-react";
-import { Button } from "@/components/ui/button";
+"use client"
+
+import { motion } from "framer-motion"
+import { Check, Star } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 const rooms = [
   {
@@ -54,7 +56,7 @@ const rooms = [
     ],
     popular: false,
   },
-];
+]
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -62,7 +64,7 @@ const containerVariants = {
     opacity: 1,
     transition: { staggerChildren: 0.2 },
   },
-};
+}
 
 const cardVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -71,20 +73,23 @@ const cardVariants = {
     y: 0,
     transition: { duration: 0.6 },
   },
-};
+}
 
 const RoomsPricing = () => {
-  const scrollToContact = () => {
-    const element = document.querySelector("#contact");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  // ✅ WHATSAPP HANDLER WITH ROOM DETAILS
+  const openWhatsApp = (roomName: string, price: string) => {
+    const phoneNumber = "917799066011" // no +
+    const message = encodeURIComponent(
+      `Hi, I am interested in the ${roomName} room at Klinkara Luxury PG (₹${price}/month). Please share availability and next steps.`
+    )
+
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank")
+  }
 
   return (
     <section id="rooms" className="py-24 bg-background">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -99,12 +104,12 @@ const RoomsPricing = () => {
             Rooms & Pricing
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Choose from our range of thoughtfully designed rooms, each offering 
+            Choose from our range of thoughtfully designed rooms, each offering
             premium comfort and exceptional value.
           </p>
         </motion.div>
 
-        {/* Pricing Cards */}
+        {/* Cards */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -123,7 +128,7 @@ const RoomsPricing = () => {
                   : "bg-white border border-border"
               }`}
             >
-              {/* Popular Badge */}
+              {/* Popular */}
               {room.popular && (
                 <div className="absolute top-0 right-0 bg-gold text-navy px-4 py-1 rounded-bl-2xl font-semibold text-sm flex items-center gap-1">
                   <Star className="w-4 h-4 fill-navy" />
@@ -132,26 +137,39 @@ const RoomsPricing = () => {
               )}
 
               <div className="p-8">
-                {/* Room Name */}
-                <h3 className={`font-display text-2xl font-bold mb-2 ${
-                  room.popular ? "text-white" : "text-navy"
-                }`}>
+                {/* Name */}
+                <h3
+                  className={`font-display text-2xl font-bold mb-2 ${
+                    room.popular ? "text-white" : "text-navy"
+                  }`}
+                >
                   {room.name}
                 </h3>
-                <p className={`text-sm mb-6 ${
-                  room.popular ? "text-white/70" : "text-muted-foreground"
-                }`}>
+
+                <p
+                  className={`text-sm mb-6 ${
+                    room.popular ? "text-white/70" : "text-muted-foreground"
+                  }`}
+                >
                   {room.description}
                 </p>
 
                 {/* Price */}
                 <div className="mb-8">
-                  <span className={`text-4xl font-bold ${
-                    room.popular ? "text-gold" : "text-navy"
-                  }`}>
+                  <span
+                    className={`text-4xl font-bold ${
+                      room.popular ? "text-gold" : "text-navy"
+                    }`}
+                  >
                     ₹{room.price}
                   </span>
-                  <span className={room.popular ? "text-white/70" : "text-muted-foreground"}>
+                  <span
+                    className={
+                      room.popular
+                        ? "text-white/70"
+                        : "text-muted-foreground"
+                    }
+                  >
                     /month
                   </span>
                 </div>
@@ -160,25 +178,33 @@ const RoomsPricing = () => {
                 <ul className="space-y-3 mb-8">
                   {room.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-3">
-                      <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
-                        room.popular ? "bg-gold" : "bg-gold/20"
-                      }`}>
-                        <Check className={`w-3 h-3 ${
-                          room.popular ? "text-navy" : "text-gold"
-                        }`} />
+                      <div
+                        className={`w-5 h-5 rounded-full flex items-center justify-center mt-0.5 ${
+                          room.popular ? "bg-gold" : "bg-gold/20"
+                        }`}
+                      >
+                        <Check
+                          className={`w-3 h-3 ${
+                            room.popular ? "text-navy" : "text-gold"
+                          }`}
+                        />
                       </div>
-                      <span className={`text-sm ${
-                        room.popular ? "text-white/90" : "text-muted-foreground"
-                      }`}>
+                      <span
+                        className={`text-sm ${
+                          room.popular
+                            ? "text-white/90"
+                            : "text-muted-foreground"
+                        }`}
+                      >
                         {feature}
                       </span>
                     </li>
                   ))}
                 </ul>
 
-                {/* CTA Button */}
+                {/* ✅ BOOK NOW → WHATSAPP */}
                 <Button
-                  onClick={scrollToContact}
+                  onClick={() => openWhatsApp(room.name, room.price)}
                   className={`w-full py-6 font-semibold ${
                     room.popular
                       ? "bg-gold hover:bg-gold-dark text-navy"
@@ -192,7 +218,7 @@ const RoomsPricing = () => {
           ))}
         </motion.div>
 
-        {/* Additional Info */}
+        {/* Note */}
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -204,7 +230,7 @@ const RoomsPricing = () => {
         </motion.p>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default RoomsPricing;
+export default RoomsPricing
