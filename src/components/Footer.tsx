@@ -38,29 +38,26 @@ const Footer = () => {
       {/* Main Footer */}
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand */}
+
+          {/* BRAND (UPDATED LOGO) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-full bg-gold flex items-center justify-center">
-                <span className="text-navy font-display text-2xl font-bold">K</span>
-              </div>
-              <div>
-                <span className="font-display text-xl font-semibold">Klinkara</span>
-                <span className="block text-xs text-white/60 tracking-widest uppercase">
-                  Luxury PG
-                </span>
-              </div>
-            </div>
+            <img
+              src="/header-logo.png"
+              alt="Klinkara Luxury PG"
+              className="h-32 w-auto mb-6 object-contain"
+            />
+
             <p className="text-white/70 text-sm leading-relaxed mb-6">
-              Experience premium living at Klinkara Luxury PG. We provide world-class 
-              amenities, delicious meals, and a vibrant community for working professionals 
-              in Hinjawadi, Pune.
+              Experience premium living at Klinkara Luxury PG. We provide world-class
+              amenities, delicious meals, and a vibrant community for working
+              professionals in Hinjawadi, Pune.
             </p>
+
             {/* Social Links */}
             <div className="flex gap-3">
               {socialLinks.map((social) => (
@@ -127,14 +124,20 @@ const Footer = () => {
               <li>
                 <span className="text-gold">Phone:</span>
                 <br />
-                <a href="tel:+917799066011" className="hover:text-gold transition-colors">
+                <a
+                  href="tel:+917799066011"
+                  className="hover:text-gold transition-colors"
+                >
                   +91 77990 66011
                 </a>
               </li>
               <li>
                 <span className="text-gold">Email:</span>
                 <br />
-                <a href="mailto:klinkaraluxury@gmail.com" className="hover:text-gold transition-colors">
+                <a
+                  href="mailto:klinkaraluxury@gmail.com"
+                  className="hover:text-gold transition-colors"
+                >
                   klinkaraluxury@gmail.com
                 </a>
               </li>
@@ -156,9 +159,12 @@ const Footer = () => {
       <div className="border-t border-white/10">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/60">
-            <p>© {new Date().getFullYear()} Klinkara Luxury PG. All rights reserved.</p>
+            <p>
+              © {new Date().getFullYear()} Klinkara Luxury PG. All rights reserved.
+            </p>
             <p className="flex items-center gap-1">
-              Made with <Heart className="w-4 h-4 text-red-500 fill-red-500" /> in Pune
+              Made with{" "}
+              <Heart className="w-4 h-4 text-red-500 fill-red-500" /> in Pune
             </p>
           </div>
         </div>
