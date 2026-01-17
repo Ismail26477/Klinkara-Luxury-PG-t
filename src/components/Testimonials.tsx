@@ -8,35 +8,45 @@ import { Button } from "@/components/ui/button"
 const testimonials = [
   {
     id: 1,
-    name: "Rahul Sharma",
-    role: "Software Engineer at Infosys",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
+    name: "Ruthvij R Chandan",
     rating: 5,
-    text: "Klinkara Luxury has been my home for the past year. The amenities are top-notch, and the community feeling is amazing. The food quality is excellent, and the staff is very helpful. Highly recommended!",
+    text: "I’m currently staying in this PG, and my experience has been really great. The owner, Anna, is very kind and supportive, and the place has a warm, homely atmosphere. The food is tasty and hygienic, and the maintenance is always on point—clean rooms, tidy common areas, and quick help whenever needed. Special mention to Sirisha for managing everything smoothly. The cab facility by Sunny is reliable and convenient. Overall, I’m very happy and would highly recommend this PG.",
   },
   {
     id: 2,
-    name: "Priya Patel",
-    role: "Product Manager at TCS",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80",
+    name: "Sujith Bayari",
     rating: 5,
-    text: "Best PG experience I've had in Pune! The rooms are spacious, clean, and well-maintained. The proximity to IT Park makes commuting so easy. The security here gives me peace of mind.",
+    text: "I’m currently staying in this PG, and it’s been a very comfortable experience. Anna, the owner, is supportive, the food is clean and tasty, and the place is well maintained. Special thanks to Sirisha for managing everything smoothly and being approachable. The cab service by Sunny is reliable and convenient. A safe and well-managed PG.",
   },
   {
     id: 3,
-    name: "Amit Kumar",
-    role: "Data Analyst at Wipro",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80",
+    name: "Meghna Kushwaha",
     rating: 5,
-    text: "Moving to Pune was made so much easier by Klinkara. The shuttle service to office is a lifesaver. The Wi-Fi speed is perfect for my work-from-home days.",
+    text: "This PG has a very comforting and homely feeling. The hall is nice and spacious, making it a great place to relax or spend time with others. The balcony is an added bonus, bringing in fresh air and light. Special thanks to the PG owners Bunny, Shrisha, and Reddy Anna for being friendly and ensuring our comfort.",
   },
   {
     id: 4,
-    name: "Sneha Reddy",
-    role: "UX Designer at Tech Mahindra",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80",
+    name: "Ruchitha Peddi",
     rating: 5,
-    text: "The attention to detail at Klinkara is impressive. From the comfortable beds to the delicious meals, everything is thoughtfully planned.",
+    text: "The PG offers spacious and well-maintained rooms that provide a comfortable and peaceful atmosphere. Its convenient location makes it an excellent choice for a hassle-free stay. Managed by a kind and well-mannered family. Amenities like refrigerator and washing machine add to the comfort.",
+  },
+  {
+    id: 5,
+    name: "Darsh Vishwakarma",
+    rating: 5,
+    text: "I have been staying at Klinkaara for the past 5 months and it has been a very positive experience. The cleanliness and maintenance stand out. The management listens to feedback. Rooms are well-ventilated and amenities like Wi-Fi, water supply, and inverter have been consistent.",
+  },
+  {
+    id: 6,
+    name: "Andra Rohith",
+    rating: 5,
+    text: "Extraordinary co-living space with all facilities including sports area, workspace, and self-cooking options. Highly appreciated and recommended.",
+  },
+  {
+    id: 7,
+    name: "Atharva Agnihotri",
+    rating: 5,
+    text: "Large rooms and a calm environment. Very comfortable place to stay.",
   },
 ]
 
@@ -54,7 +64,9 @@ const Testimonials = () => {
 
   const goToPrevious = () => {
     setDirection(-1)
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+    setCurrentIndex(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    )
   }
 
   const goToNext = () => {
@@ -76,7 +88,7 @@ const Testimonials = () => {
 
   return (
     <section className="py-16 bg-navy relative overflow-hidden">
-      {/* Decorative Blur */}
+      {/* Decorative blur */}
       <div className="absolute top-0 left-0 w-72 h-72 bg-gold/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-gold/5 rounded-full blur-3xl" />
 
@@ -96,7 +108,7 @@ const Testimonials = () => {
             What Our Residents Say
           </h2>
           <p className="text-white/70 max-w-xl mx-auto text-sm">
-            Here's what our happy residents have to say about their experience.
+            Real experiences from people who call Klinkara their home.
           </p>
         </motion.div>
 
@@ -114,29 +126,32 @@ const Testimonials = () => {
                 transition={{ duration: 0.35, ease: "easeInOut" }}
                 className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/10"
               >
-                <Quote className="w-8 h-8 text-gold/40 mb-4" />
+                <Quote className="w-8 h-8 text-gold/40 mb-3" />
+
+                <p className="text-gold/60 text-sm mb-3">
+                  “Care Like a Mother”
+                </p>
 
                 <p className="text-white/90 text-base md:text-lg leading-relaxed mb-6">
                   "{testimonials[currentIndex].text}"
                 </p>
 
-                <div className="flex items-center gap-4">
-                  <img
-                    src={testimonials[currentIndex].image}
-                    alt={testimonials[currentIndex].name}
-                    className="w-12 h-12 rounded-full object-cover ring-2 ring-gold"
-                  />
+                <div className="flex items-center">
                   <div>
-                    <h4 className="text-white font-semibold text-sm">
+                    <h4 className="text-white font-semibold text-base">
                       {testimonials[currentIndex].name}
                     </h4>
-                    <p className="text-white/60 text-xs">
-                      {testimonials[currentIndex].role}
+                    <p className="text-gold text-xs mt-1">
+                      Verified Resident
                     </p>
                   </div>
+
                   <div className="ml-auto flex gap-1">
                     {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 text-gold fill-gold" />
+                      <Star
+                        key={i}
+                        className="w-4 h-4 text-gold fill-gold"
+                      />
                     ))}
                   </div>
                 </div>
@@ -150,7 +165,7 @@ const Testimonials = () => {
               variant="outline"
               size="icon"
               onClick={goToPrevious}
-              className="h-9 w-9 rounded-full border-white/20 text-white hover:bg-white/10"
+              className="h-9 w-9 rounded-full border-white/20 text-black hover:bg-white/10"
             >
               <ChevronLeft className="w-4 h-4" />
             </Button>
@@ -176,7 +191,7 @@ const Testimonials = () => {
               variant="outline"
               size="icon"
               onClick={goToNext}
-              className="h-9 w-9 rounded-full border-white/20 text-white hover:bg-white/10"
+              className="h-9 w-9 rounded-full border-white/20 text-black hover:bg-white/10"
             >
               <ChevronRight className="w-4 h-4" />
             </Button>
