@@ -226,7 +226,7 @@ const RoomsPricing = () => {
           transition={{ delay: 0.5 }}
           className="text-center text-muted-foreground mt-10"
         >
-          * All prices are exclusive of GST. Security deposit of 2 months required.
+          * All prices are exclusive of GST. Security deposit of 1 months required.
         </motion.p>
       </div>
     </section>
