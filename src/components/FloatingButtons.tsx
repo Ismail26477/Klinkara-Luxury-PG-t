@@ -403,7 +403,7 @@ const FloatingButtons = () => {
                   </motion.a>
                 </div>
                 <p className="text-[10px] text-muted-foreground text-center">
-                  Powered by Klinkara • Available 24/7
+                  Powered by D-code Studio • Available 24/7
                 </p>
               </motion.div>
             </motion.div>
